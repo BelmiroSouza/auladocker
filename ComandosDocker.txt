@@ -1,0 +1,57 @@
+docker container run hell-world -- teste do container
+docker container run -it debian bash --> acesso ao terminal do container
+      touch curso-docker.txt --> criar um arquivo 
+docker container run --name mydeb -it debian bash -- criar conatiner com nome
+docker container start -ai nomeContainer --> atacha o container 
+docker container run -p 8080:80 nginx--- start uma porta 8080 porta para acesso externa e 80 acesso interno
+docker container ps --> para ver todos os container ativos
+docker container stop nomes_container --> para container	
+docker container run -p 8080:80 -v --> start nginx na porta e mapear volume
+   exemplo->
+ docker container run -p 8080:80 -v /c/Users/belmi/Desktop/curso-docker/ex-volume/html:/usr/share/nginx/html nginx 
+ O docker daemon nao aceita a sintaxe padrão do path do Windows. então apenas troque para a sintaxe parecida com a de cima. Resumindo, ao  invés de C:/ utilize /c/
+
+docker container run -d --name nome-container -p 8080:80 -v /c/Users/belmi/Desktop/curso-docker/ex-volume/html:/usr/share/nginx/html nginx                                                                                                     
+--> -d modo dino rodar o Servidor container em background
+docker container run -d --name ex-daemon-basic -p 8080:80 -v /c/Users/belmi/Desktop/curso-docker/ex-volume/html:/usr/share/nginx/html nginx
+docker container start   ex-daemon-basic (nome container)   --> start em um servidor
+docker container restart ex-daemon-basic --> restart em um servidor
+docker container ls ou list ou ps--> comandos de listagem de container
+docker container ls -a ou list -a ou ps -a -->container que foram criados 
+docker container logs ex-daemon-basic (nome container) --> ver log dos containers
+docker container inspect ex-daemon-basic (nome container)  --> log com maiores detalhes
+docker container exec ex-daemon-basic -or                  --> identificar o tipo de container que estão executando no meu container    
+docker image ls --> lista todas as imagens
+docker volume ls --> listar todos os volumes    
+docker image rm ou  docker 	rmi id_imagem  --> remover imagem   
+docker container rm  docker rm  id_container -->remover container        
+docker container --help --> acesso aos comandos de help do container
+docker image --help --> accesso aos comandos da imagem
+docker volume --help --> acesso aos comandos de volume
+docker image inspect redis:latest   --> inspecionar uma imagem
+docker image tag redis:latest cod3r-redis --> criar uma nova image com a mesma caracteristica 
+docker image pull --> baixar a imagem
+docker image rm --> remover imagem
+docker image build --> gerar uma imagem a partir de um descritor
+docker image push --> carrega a sua imagem
+docker imagem build -t ex-simple-build . (nome imagem) ---> -t é tag(nome) que vc que colocar na imagem o (.) é para pegar a pasta atual.
+docker container run ex-build-arg bash -c 'echo $S3_BUCKET' --> passar argumentos 
+docker image build --build-arg S3_BUCKET=ArgumentoParaPassar -t ex-build-arg . (.)pasta atual    --> passando argumento substituindo o que foi digitado no docker file
+docker image inspect --format="{{index .Config.Labels \"maintainer\"}}" ex-build-arg (nome imagem) --> pesquisa no docker file
+docker container network ls --> mostrar as redes
+docker container push belmirosouza/nomecontainer (usuario/nomecontainer) --> carrega o container no docker hub
+docker network inspect bridge -- inspecionar a rede
+docker container run -d --name container1 alpine sleep 1000 --> executar container modo modo dino 
+docker container exec -it container1 ifconfig --> executa modo interativo e mostra o endereço ip 172.17.0.2 172.17.0.3
+docker container exec -it container1 ping 172.17.0.3 --> ping no endereco
+docker network create --driver bridge rede_nova --> criar rede
+docker container run -d --name container3 --net rede_nova
+docker network connect bridge container3 --> conectar container entre redes
+docker network disconnect bridge container3 --> desconeta container3 da rede bridge
+npn init -y --> iniciar o docker compose
+docker-compose up   --> iniciar o docker compose
+docker-compose exec db psql -U postgres -c '\l' --> listar os bancos de dados	
+docker-compose down --> parar o servidor
+docker-compose exec db psql -U postgres -f ./scripts/check.sql -> rodar o script do postgres 
+docker-compose logs -f -t --> ver os logs do compose e ainda os log ficam ativos para voce ver 
+
